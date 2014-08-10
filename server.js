@@ -31,7 +31,11 @@ app.get('*', function(req, res) {
 
 
 //mongodb
-mongoose.connect('mongodb://localhost/multivision');
+if(env === 'development'){
+    mongoose.connect('mongodb://localhost/multivision');
+}else{
+    mongoose.connect('mongodb://joker:multivision@ds029960.mongolab.com:29960/multivision');
+}
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error...'));
 db.once('open', function callback() {
@@ -46,6 +50,6 @@ Message.findOne().exec(function(err, messageDoc) {
     console.log(messageDoc);
 });
 
-var port = 8000;
+var port = process.env.PORT || 8000;
 app.listen(port);
 console.log('Listening on port ' + port + '...');
