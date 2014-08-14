@@ -12,3 +12,8 @@ exports.authenticate = function(req, res, next){
     });
     auth(req, res, next);
 };
+
+exports.logout = function(req, res){
+    req.logout();
+    res.end();
+};
