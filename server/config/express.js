@@ -1,6 +1,3 @@
-/**
- * Created by joker on 8/11/14.
- */
 var express = require('express');
 var passport = require('passport');
 var logger = require('morgan');
