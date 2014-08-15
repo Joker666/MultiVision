@@ -3,16 +3,8 @@ angular.module('app', ['ngResource', 'ngRoute']);
 angular.module('app').config(function($routeProvider, $locationProvider) {
 
     var routeRoleChecks = {
-        admin: {
-            auth: function(myAuth) {
-                return myAuth.authorizeCurrentUserForRoute('admin')
-            }
-        },
-        user: {
-            auth: function(myAuth) {
-                return myAuth.authorizeAuthenticatedUserForRoute()
-            }
-        }
+        admin: { auth: function(myAuth) { return myAuth.authorizeCurrentUserForRoute('admin') } },
+        user: { auth: function(myAuth) { return myAuth.authorizeAuthenticatedUserForRoute() } }
     };
 
     $locationProvider.html5Mode(true);
@@ -34,6 +26,10 @@ angular.module('app').config(function($routeProvider, $locationProvider) {
             templateUrl: '/partials/account/profile',
             controller: 'mvProfileCtrl',
             resolve: routeRoleChecks.user
+        })
+        .when('/courses', {
+            templateUrl: '/partials/courses/course-list',
+            controller: 'mvCourseListCtrl'
         });
 });
 
